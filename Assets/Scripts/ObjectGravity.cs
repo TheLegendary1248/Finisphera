@@ -6,7 +6,11 @@ public class ObjectGravity : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Vector2 gravity;
-    const float scale = -20f;
+    public float scale = -20f;
+    private void Start()
+    {
+        gravity = new Vector2(0, scale);
+    }
     private void FixedUpdate()
     {
         rb.AddForce(rb.mass * gravity);
