@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ObjectGravity : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Rigidbody2D rb;
+    public Vector2 gravity;
+    const float scale = -20f;
+    private void FixedUpdate()
     {
-        
+        rb.AddForce(rb.mass * gravity);
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        gravity = collision.GetContact(0).normal * scale;   
     }
 }
