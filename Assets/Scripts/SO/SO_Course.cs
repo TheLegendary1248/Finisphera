@@ -10,6 +10,6 @@ public class SO_Course : ScriptableObject
     public AnimationCurve SpecialRanking;
     public AudioClip mainMusic;
     public AudioClip specialMusic;
-    public UnityEngine.SceneManagement.Scene[] levels;
-    public UnityEngine.SceneManagement.Scene[] specialLevels;
+    public GameObject[] levels;
+    public GameObject[] specialLevels;
 }
