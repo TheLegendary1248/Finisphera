@@ -493,6 +493,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
+    - target: {fileID: 368107404294727414, guid: 611cc3c066f866b47aaa212c45a84509, type: 3}
+      propertyPath: m_Time
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 368107404294727415, guid: 611cc3c066f866b47aaa212c45a84509, type: 3}
       propertyPath: m_Material
       value: 
@@ -683,6 +687,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6033867693961115602, guid: 7d2152a2418e89140b3989e25f6edbb6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
     - target: {fileID: 6033867693961115602, guid: 7d2152a2418e89140b3989e25f6edbb6, type: 3}
       propertyPath: m_SortingOrder
       value: 0
