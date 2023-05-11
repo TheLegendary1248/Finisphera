@@ -263,3 +263,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objGrav: {fileID: 368107404294727411}
+  rb: {fileID: 368107404294727412}

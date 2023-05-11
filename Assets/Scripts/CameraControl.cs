@@ -18,4 +18,12 @@ public class CameraControl : MonoBehaviour
         }
         
     }
+    public static Vector2 MousePos()
+    {
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+    public static Vector2 MousePos(Camera c)
+    {
+        return c.ScreenToWorldPoint(Input.mousePosition);
+    }
 }
