@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 5f57135c6f1bdab468130482e91ada12, type: 3}
   m_Name: Settings
-  m_EditorClassIdentifier: Assembly-CSharp::SO_MaterialSettings
-  materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 2100000, guid: cc1eeee7f61065046b99f80600d3b59c, type: 2}
-  colors:
-  - {r: 0.5411765, g: 1, b: 0.5137255, a: 1}
-  - {r: 0.9756862, g: 0.5137255, b: 1, a: 1}
+  m_EditorClassIdentifier: 
+  materials: []
+  colors: []

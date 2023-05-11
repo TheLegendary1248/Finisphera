@@ -21,6 +21,9 @@ public class BallScript : MonoBehaviour
     {
         ProcessUserInput();
     }
+    /// <summary>
+    /// Process input
+    /// </summary>
     void ProcessUserInput()
     {
         if(Input.GetKeyDown(KeyCode.Space))

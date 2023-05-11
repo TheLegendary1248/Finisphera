@@ -17,7 +17,6 @@ public class LevelSerializer : MonoBehaviour
             if (cGO != null && !EditorUtility.IsPersistent(cGO.transform.root.gameObject) && !(go.hideFlags == HideFlags.NotEditable || go.hideFlags == HideFlags.HideAndDontSave))
                 Debug.Log(go, go);
         }
-       
     }
     void LoadLevel()
     {
