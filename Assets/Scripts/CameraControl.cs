@@ -9,7 +9,8 @@ public class CameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(BallScript.self.gameObject)
+        //Null Coalescing doesn't work here
+        if (BallScript.self != null) if(BallScript.self.gameObject)
         {
             float angle = transform.eulerAngles.z;
             Vector2 refGrav = BallScript.self.objGrav.gravity;

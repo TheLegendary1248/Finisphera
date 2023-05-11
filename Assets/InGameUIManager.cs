@@ -8,7 +8,6 @@ public class InGameUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timestamp = Time.time;
     }
 
     // Update is called once per frame
@@ -17,14 +16,19 @@ public class InGameUIManager : MonoBehaviour
         TimeFormatted();
     }
 
-    float timestamp;
-    public TMPro.TextMeshProUGUI timeElaspedText;
+    public TMPro.TextMeshProUGUI courseTimeElaspedText;
+    public TMPro.TextMeshProUGUI levelTimeElaspedText;
     void TimeFormatted()
     {
-        if(timeElaspedText)
+        if(levelTimeElaspedText)
         {
-            var t = System.TimeSpan.FromSeconds(Time.time - timestamp);
-            timeElaspedText.text = t.ToString(@"mm\:ss\'fff");
+            var t = System.TimeSpan.FromSeconds(GameManager.timeSinceLevelStart);
+            levelTimeElaspedText.text = t.ToString(@"mm\:ss\'fff");
+        }
+        if (courseTimeElaspedText)
+        {
+            var t = System.TimeSpan.FromSeconds(GameManager.timeSinceCourseStart);
+            courseTimeElaspedText.text = t.ToString(@"mm\:ss\'fff");
         }
     }
 }
