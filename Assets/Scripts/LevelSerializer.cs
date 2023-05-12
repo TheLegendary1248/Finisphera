@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
+/// <summary>
+/// This was a desperate attempt in the name of stupidty
+/// </summary>
 public class LevelSerializer : MonoBehaviour
 {
 

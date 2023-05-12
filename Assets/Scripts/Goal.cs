@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
+    
+    public GameObject fx;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Ball"))
+            GameManager.WinCondition();
         Debug.Log(collision);
     }
     // Update is called once per frame

@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     public static event System.Action<bool> onStroke;
     
     public static event System.Action onNewLevel;
+    public static event System.Action reachedGoal;
+    //im sorry, are you complaining about this for some reason? gtfo
+    public static void WinCondition() => reachedGoal();
     /// <summary>
     /// Time since a course was started
     /// </summary>
@@ -63,9 +66,5 @@ public class GameManager : MonoBehaviour
     {
 
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

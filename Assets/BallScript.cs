@@ -9,6 +9,7 @@ public class BallScript : MonoBehaviour
     public static BallScript self;
     public ObjectGravity objGrav;
     public Rigidbody2D rb;
+    public GameObject[] disableGOList;
     private void Start()
     {
         self = this;
@@ -20,6 +21,13 @@ public class BallScript : MonoBehaviour
     public void Update()
     {
         ProcessUserInput();
+    }
+    public void ArtificiallyRemove()
+    {
+        for (int i = 0; i < disableGOList.Length; i++)
+            disableGOList[i].SetActive(false);
+        objGrav.enabled = false;
+        rb.simulated = false;
     }
     /// <summary>
     /// Process input

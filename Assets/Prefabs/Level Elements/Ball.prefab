@@ -106,6 +106,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objGrav: {fileID: 368107404294727411}
   rb: {fileID: 368107404294727412}
+  disableGOList:
+  - {fileID: 1887750290117426938}
+  - {fileID: 1887750290117426938}
+  - {fileID: 755502071371481234}
+  disableMBList:
+  - {fileID: 368107404294727411}
+  - {fileID: 368107404294727412}
+  - {fileID: 368107404294727415}
 --- !u!1 &755502071371481234
 GameObject:
   m_ObjectHideFlags: 0
