@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f57135c6f1bdab468130482e91ada12, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  materials: []
-  colors: []
+  materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  colors:
+  - {r: 0.5411765, g: 1, b: 0.5137255, a: 1}

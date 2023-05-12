@@ -14,6 +14,7 @@ public class Goal : MonoBehaviour
         {
             GameManager.WinCondition();
             collision.gameObject.GetComponent<BallScript>().Remove();
+            Instantiate(fx, transform.position, transform.rotation);
         }
             
         Debug.Log(collision);

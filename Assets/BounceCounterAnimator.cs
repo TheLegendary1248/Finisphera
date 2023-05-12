@@ -22,46 +22,48 @@ public class BounceCounterAnimator : MonoBehaviour
     public AnimationCurve curve;
     Coroutine playingAnim;
     //Update the bounce counter
-    void UpdateCurrentState()
+    public void UpdateCurrentState()
     {
-        int newCount = (int)GameManager.BouncesLeft;
+        int newCount = (int)GameManager.bouncesLeft;
+        Debug.Log($"New : {newCount} / Internal : {internalCount} / arr.Length : {array.Length}");
         //Do nothing
         if (internalCount == newCount)
             return;
-        //Remove some
+        //Add some
         if (internalCount < newCount)
         {
             //If we need more counters
             if (newCount > array.Length)
             { 
-                //DONT WORRY ABOUT IT YET
-                /*
-                new GameObject[] = 
-                array.Concat()*/
+                GameObject[] concat = new GameObject[newCount - array.Length];
+                for (int i = 0; i < concat.Length; i++)
+                {
+                    GameObject go = Instantiate(prefab, transform);
+                    ((RectTransform)go.transform).anchoredPosition = new Vector2((internalCount + i) * spacing, 0);
+                    concat[i] = go;
+                }
+                array = array.Concat(concat).ToArray();
             }
-            GameObject[] needsUpdate = array[newCount..(int)internalCount];
-            for (int i = 0; i < needsUpdate.Length; i++)
-            {
-                needsUpdate[i].GetComponent<Animation>().Rewind();
-            }
-        }
-        //Add some
-        if(internalCount > newCount)
-        {
-            //Resize array to accomodate the new bounce count
-            if(array.Length < newCount)
-            {
-
-            }
+            
             GameObject[] needsUpdate = array[(int)internalCount..newCount];
             for (int i = 0; i < needsUpdate.Length; i++)
             {
                 needsUpdate[i].GetComponent<Animation>().Play();
             }
         }
+        //Remove some
+        if(internalCount > newCount)
+        {
+            GameObject[] needsUpdate = array[newCount..(int)internalCount];
+            for (int i = 0; i < needsUpdate.Length; i++)
+            {
+                Animation anim = needsUpdate[i].GetComponent<Animation>();
+                anim.Play();
+            }
+        }
         //Finalization
-        SetAnim();
         internalCount = (uint)newCount;
+        SetAnim();
     }
     void SetAnim()
     {
@@ -74,9 +76,9 @@ public class BounceCounterAnimator : MonoBehaviour
         RectTransform selfTS = (RectTransform)transform;
         float timestamp, timesince; timestamp = timesince = Time.time;
         float currentX = selfTS.anchoredPosition.x;
-        Vector2 endStatePosition = new Vector2(internalCount * spacing / 2f, selfTS.anchoredPosition.y);
+        Vector2 endStatePosition = new Vector2((internalCount - 1) * -spacing / 2f, selfTS.anchoredPosition.y);
         //Animate
-        while (curve.keys[^1].time < (timesince = Time.time - timestamp))
+        while (curve.keys[^1].time > (timesince = Time.time - timestamp))
         {
             float interpol = curve.Evaluate(timesince);
             selfTS.anchoredPosition = new Vector2(Mathf.Lerp(currentX, endStatePosition.x, interpol), endStatePosition.y); 

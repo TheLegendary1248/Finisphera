@@ -19,7 +19,7 @@ public class InGameUIManager : MonoBehaviour
     public TMPro.TextMeshProUGUI bouncesCounterText;
     void UpdateBounces()
     {
-        if(bouncesCounterText) bouncesCounterText.text = GameManager.BouncesLeft.ToString();
+        if(bouncesCounterText) bouncesCounterText.text = GameManager.bouncesLeft.ToString();
     }
     public TMPro.TextMeshProUGUI courseTimeElaspedText;
     public TMPro.TextMeshProUGUI levelTimeElaspedText;
@@ -36,4 +36,11 @@ public class InGameUIManager : MonoBehaviour
             courseTimeElaspedText.text = t.ToString(@"mm\:ss\'fff");
         }
     }
+}
+/// <summary>
+/// Public UI thingy, giveme a sec im trying!!!!
+/// </summary>
+public interface UIPart
+{
+
 }

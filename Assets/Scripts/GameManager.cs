@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     public static float timeSinceLevelStart => Time.time - _timeOfLevelStart;
     public static float timeOfLevelStart => _timeOfLevelStart;
     static float _timeOfLevelStart = 0;
-    public static uint BouncesLeft = 3;
+    public static uint bouncesLeft = 3;
     //Event for session start
     //Event for level start
     //
@@ -66,5 +66,32 @@ public class GameManager : MonoBehaviour
     {
 
     }
-    
+    public BounceCounterAnimator animator;
+    private void Start()
+    {
+        return;
+        animator.UpdateCurrentState();
+    }
+    void Update()
+    {
+        return;
+        bool gotInput = false;
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            gotInput = true;
+            bouncesLeft += 1;
+            
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            gotInput = true;
+            bouncesLeft -= 1;
+            
+        }
+        if (gotInput)
+        {
+            animator.UpdateCurrentState();
+            Debug.Log($"Bounces Left: {bouncesLeft}");
+        }
+    }
 }
