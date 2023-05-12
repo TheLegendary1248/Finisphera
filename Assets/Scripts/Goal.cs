@@ -11,7 +11,11 @@ public class Goal : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ball"))
+        {
             GameManager.WinCondition();
+            collision.gameObject.GetComponent<BallScript>().Remove();
+        }
+            
         Debug.Log(collision);
     }
     // Update is called once per frame

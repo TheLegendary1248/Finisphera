@@ -22,12 +22,13 @@ public class BallScript : MonoBehaviour
     {
         ProcessUserInput();
     }
-    public void ArtificiallyRemove()
+    public void Remove() => Toggle(false);
+    public void Toggle(bool flip)
     {
         for (int i = 0; i < disableGOList.Length; i++)
-            disableGOList[i].SetActive(false);
-        objGrav.enabled = false;
-        rb.simulated = false;
+            disableGOList[i].SetActive(flip);
+        objGrav.enabled = flip;
+        rb.simulated = flip;
     }
     /// <summary>
     /// Process input

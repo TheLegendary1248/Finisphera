@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public static event System.Action onNewLevel;
     public static event System.Action reachedGoal;
     //im sorry, are you complaining about this for some reason? gtfo
-    public static void WinCondition() => reachedGoal();
+    public static void WinCondition() => reachedGoal?.Invoke();
     /// <summary>
     /// Time since a course was started
     /// </summary>

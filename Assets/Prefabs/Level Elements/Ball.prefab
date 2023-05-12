@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1147265159510351376}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,12 +108,8 @@ MonoBehaviour:
   rb: {fileID: 368107404294727412}
   disableGOList:
   - {fileID: 1887750290117426938}
-  - {fileID: 1887750290117426938}
   - {fileID: 755502071371481234}
-  disableMBList:
-  - {fileID: 368107404294727411}
-  - {fileID: 368107404294727412}
-  - {fileID: 368107404294727415}
+  - {fileID: 1307143329977509386}
 --- !u!1 &755502071371481234
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +236,7 @@ GameObject:
   - component: {fileID: 270121314126605252}
   - component: {fileID: 991670152894835708}
   m_Layer: 0
-  m_Name: Ball
+  m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
