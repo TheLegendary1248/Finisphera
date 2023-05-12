@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7177810348327891078, guid: 1d52d363865aed040a11460e3a4e19f9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177810348327891078, guid: 1d52d363865aed040a11460e3a4e19f9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7293819460678891968, guid: 1d52d363865aed040a11460e3a4e19f9, type: 3}
       propertyPath: m_Name
       value: First Level
@@ -177,6 +185,14 @@ PrefabInstance:
     - target: {fileID: 7293819460678891983, guid: 1d52d363865aed040a11460e3a4e19f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214841091584130376, guid: 1d52d363865aed040a11460e3a4e19f9, type: 3}
+      propertyPath: m_Name
+      value: Ball Sprite
+      objectReference: {fileID: 0}
+    - target: {fileID: 8796022099830711736, guid: 1d52d363865aed040a11460e3a4e19f9, type: 3}
+      propertyPath: m_Name
+      value: Ball Border
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d52d363865aed040a11460e3a4e19f9, type: 3}

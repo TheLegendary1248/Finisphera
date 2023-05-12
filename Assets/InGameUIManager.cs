@@ -6,8 +6,9 @@ public class InGameUIManager : MonoBehaviour
 {
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        
     }
 
     // Update is called once per frame
@@ -15,7 +16,11 @@ public class InGameUIManager : MonoBehaviour
     {
         TimeFormatted();
     }
-
+    public TMPro.TextMeshProUGUI bouncesCounterText;
+    void UpdateBounces()
+    {
+        if(bouncesCounterText) bouncesCounterText.text = GameManager.BouncesLeft.ToString();
+    }
     public TMPro.TextMeshProUGUI courseTimeElaspedText;
     public TMPro.TextMeshProUGUI levelTimeElaspedText;
     void TimeFormatted()

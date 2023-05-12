@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public static float timeSinceLevelStart => Time.time - _timeOfLevelStart;
     public static float timeOfLevelStart => _timeOfLevelStart;
     static float _timeOfLevelStart = 0;
+    public static uint BouncesLeft = 3;
     //Event for session start
     //Event for level start
     //
