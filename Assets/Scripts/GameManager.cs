@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     //Event for level start
     //
     // Start is called before the first frame update
+
     void LoadCourse()
     {
         //Initialize values
