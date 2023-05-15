@@ -31,6 +31,7 @@ public class GravityModifier : MonoBehaviour
     {
         SetColor();
     }
+    
     void SetColor()
     {
 

@@ -46,11 +46,17 @@ public class GameManager : MonoBehaviour
 
     void LoadCourse()
     {
-        //Initialize values
+        //Finalize this method
+        InitializeSession();
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    void InitializeSession()
+    {
         onNewLevel?.Invoke();
         _timeOfCourseStart = _timeOfLevelStart = Time.time;
     }
-
     [MenuItem("Assets/CheckObjects")]
     static void ClearCurrent()
     {
@@ -70,12 +76,18 @@ public class GameManager : MonoBehaviour
     public BounceCounterAnimator animator;
     private void Start()
     {
+#if UNITY_EDITOR
+        //If the scene has gameobjects present already, treat is as an ongoing game
+        if(SceneManager.GetActiveScene().GetRootGameObjects().Length > 0)
+        {
+            
+        }
+#endif
         return;
         animator.UpdateCurrentState();
     }
     void Update()
     {
-        return;
         bool gotInput = false;
         if (Input.GetKeyDown(KeyCode.T))
         {
