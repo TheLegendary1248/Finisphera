@@ -17,7 +17,7 @@ public class Goal : MonoBehaviour
             Instantiate(fx, transform.position, transform.rotation);
         }
             
-        Debug.Log(collision);
+        //Debug.Log(collision);
     }
     // Update is called once per frame
     void RegisterComplete()

@@ -6,6 +6,7 @@ public class BallScript : MonoBehaviour
 {
     static event System.Action onBounce;
     public static Vector2 spawnpoint;
+    public static Vector2 lastStrokePoint;
     public static BallScript self;
     public ObjectGravity objGrav;
     public Rigidbody2D rb;
@@ -19,10 +20,6 @@ public class BallScript : MonoBehaviour
         onBounce?.Invoke();
         GameManager.bouncesLeft -= 1;
     }
-    public void Update()
-    {
-        ProcessUserInput();
-    }
     public void Remove() => Toggle(false);
     public void Toggle(bool flip)
     {
@@ -34,13 +31,8 @@ public class BallScript : MonoBehaviour
     /// <summary>
     /// Process input
     /// </summary>
-    void ProcessUserInput()
+    void Kill()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Vector2 force = CameraControl.MousePos() - (Vector2)transform.position;
-            rb.AddForce(force * rb.mass, ForceMode2D.Impulse);
-        }
-
+        
     }
 }

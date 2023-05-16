@@ -20,5 +20,9 @@ public class InputManager : MonoBehaviour
         {
             GameManager.Inputs["Submit"]();
         }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            GameManager.Inputs["Reset"]();
+        }
     }
 }

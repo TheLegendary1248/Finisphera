@@ -24,6 +24,7 @@ public class ToggledAnimation : MonoBehaviour
     float elaspedTime = 0f;
     public bool playScaled = false;
     public bool playOnFixed = false;
+    //Function to toggle
     void Toggle()
     {
         if (routine == null) StartCoroutine(Animate());

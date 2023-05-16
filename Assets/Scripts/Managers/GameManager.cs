@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     static void InitializeSession()
     {
-        Debug.Log("Init");
+        //Debug.Log("Init");
         ExitPause(); 
         EnterSwing();   
         _timeOfCourseStart = _timeOfLevelStart = Time.time;
@@ -165,9 +165,9 @@ public class GameManager : MonoBehaviour
     {
         if(isOnSwing)
         {
-            BallScript.self.rb.AddForce(Vector2.one * 5f, ForceMode2D.Impulse);
-            //Get force from mouse position, calculate with ball
-            //Give force to ball
+            BallScript ball = BallScript.self;
+            Vector2 force = CameraControl.MousePos() - (Vector2)ball.transform.position;
+            ball.rb.AddForce(force * ball.rb.mass, ForceMode2D.Impulse);
             ExitSwing();
         }
     }

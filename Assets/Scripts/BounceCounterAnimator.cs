@@ -37,7 +37,7 @@ public class BounceCounterAnimator : MonoBehaviour
     public void UpdateCurrentState()
     {
         int newCount = (int)GameManager.bouncesLeft;
-        Debug.Log($"New : {newCount} / Internal : {internalCount} / arr.Length : {array.Length}");
+        //Debug.Log($"New : {newCount} / Internal : {internalCount} / arr.Length : {array.Length}");
         //Do nothing
         if (internalCount == newCount)
             return;
