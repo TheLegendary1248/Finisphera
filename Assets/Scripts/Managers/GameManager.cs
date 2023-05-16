@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
     }
     static void EnterSwing()
     {
+        bouncesLeft = 3;
         Time.timeScale = 0f;
         isOnSwing = true;
     }
@@ -150,8 +151,9 @@ public class GameManager : MonoBehaviour
         get => _bouncesLeft;
         set {
             if (_bouncesLeft == value) return;
-            onBouncesChanged?.Invoke();
             _bouncesLeft = value;
+            onBouncesChanged?.Invoke();
+            if (value == 0) EnterSwing();
         }
     }
     public static Dictionary<string, System.Action> Inputs = new Dictionary<string, System.Action>
