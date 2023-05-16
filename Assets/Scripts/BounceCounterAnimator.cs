@@ -24,6 +24,7 @@ public class BounceCounterAnimator : MonoBehaviour
     //Proper event subscription
     public void OnEnable()
     {
+        UpdateCurrentState();
         GameManager.onBouncesChanged += UpdateCurrentState;
     }
     public void OnDisable()
@@ -55,11 +56,10 @@ public class BounceCounterAnimator : MonoBehaviour
                 }
                 array = array.Concat(concat).ToArray();
             }
-            
             GameObject[] needsUpdate = array[(int)internalCount..newCount];
             for (int i = 0; i < needsUpdate.Length; i++)
-            {
-                needsUpdate[i].GetComponent<Animation>().Play();
+            {   //Play anims
+                needsUpdate[i].GetComponent<ToggledAnimation>().activeState = true;
             }
         }
         //Remove some
@@ -67,9 +67,9 @@ public class BounceCounterAnimator : MonoBehaviour
         {
             GameObject[] needsUpdate = array[newCount..(int)internalCount];
             for (int i = 0; i < needsUpdate.Length; i++)
-            {
-                Animation anim = needsUpdate[i].GetComponent<Animation>();
-                anim.Play();
+            {   //Play anims
+                ToggledAnimation anim = needsUpdate[i].GetComponent<ToggledAnimation>();
+                anim.activeState = false;
             }
         }
         //Finalization

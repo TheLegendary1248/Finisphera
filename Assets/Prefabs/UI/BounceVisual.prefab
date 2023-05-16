@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6368739012082655298}
   - component: {fileID: 6368739012082655296}
   - component: {fileID: 6368739012082655297}
-  - component: {fileID: 4234633444131079297}
+  - component: {fileID: 8117630861717587855}
   m_Layer: 5
   m_Name: BounceVisual
   m_TagString: Untagged
@@ -77,19 +77,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!111 &4234633444131079297
-Animation:
+--- !u!114 &8117630861717587855
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6368739012082655299}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: b1685cda799d20848a5555c6ac2e25c8, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: b1685cda799d20848a5555c6ac2e25c8, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e3d4ebc65e5004a9dd7bc3a63f9e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animation: {fileID: 7400000, guid: b1685cda799d20848a5555c6ac2e25c8, type: 2}
+  playScaled: 0
+  playOnFixed: 0

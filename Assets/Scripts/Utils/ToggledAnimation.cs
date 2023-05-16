@@ -6,10 +6,18 @@ using UnityEngine;
 public class ToggledAnimation : MonoBehaviour
 {
     public AnimationClip animation;
-    bool _enabledState;
-    public bool _enabled
+    bool _activeState;
+    public bool activeState
     {
-        get => _enabled;
+        get => _activeState;
+        set
+        {
+            if(value != _activeState)
+            {
+                _activeState = value;
+                Toggle();
+            }
+        }
     }
 
     Coroutine routine;
@@ -18,30 +26,34 @@ public class ToggledAnimation : MonoBehaviour
     public bool playOnFixed = false;
     void Toggle()
     {
-        if (_enabled)
-        {
-
-        }
-        else
-        {
-
-        }
+        if (routine == null) StartCoroutine(Animate());
+        else elaspedTime = animation.length - elaspedTime;
+    }
+    //Clean up because routines can't exist while disabled
+    private void OnDisable()
+    {
+        if (routine == null) return;
+        StopCoroutine(routine);
+        animation.SampleAnimation(gameObject, _activeState ? animation.length : 0f);
     }
     IEnumerator Animate()
     {
         //Animation
         while (elaspedTime < animation.length)
         {
+            //Get time
             elaspedTime +=
                 playScaled ?
                     playOnFixed ? Time.fixedDeltaTime         : Time.deltaTime
                 :   playOnFixed ? Time.fixedUnscaledDeltaTime : Time.unscaledDeltaTime;
 
-            animation.SampleAnimation(gameObject, elaspedTime);
+            animation.SampleAnimation(gameObject, (_activeState ? elaspedTime :  animation.length - elaspedTime) );
             yield return playOnFixed ? new WaitForFixedUpdate() : new WaitForEndOfFrame();
         }
-        //End state
-        animation.SampleAnimation(gameObject, _enabled ? animation.length : 0f);
+        //Final state
+        animation.SampleAnimation(gameObject, _activeState ? animation.length : 0f);
+        elaspedTime = 0f;
+        routine = null;
     }
     
 }
