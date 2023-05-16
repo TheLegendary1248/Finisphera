@@ -5,16 +5,43 @@ using UnityEngine;
 
 public class ToggledAnimation : MonoBehaviour
 {
-    //
-    // Start is called before the first frame update
-    void Start()
+    public AnimationClip animation;
+    bool _enabledState;
+    public bool _enabled
     {
-        
+        get => _enabled;
     }
 
-    // Update is called once per frame
-    void Update()
+    Coroutine routine;
+    float elaspedTime = 0f;
+    public bool playScaled = false;
+    public bool playOnFixed = false;
+    void Toggle()
     {
-        
+        if (_enabled)
+        {
+
+        }
+        else
+        {
+
+        }
     }
+    IEnumerator Animate()
+    {
+        //Animation
+        while (elaspedTime < animation.length)
+        {
+            elaspedTime +=
+                playScaled ?
+                    playOnFixed ? Time.fixedDeltaTime         : Time.deltaTime
+                :   playOnFixed ? Time.fixedUnscaledDeltaTime : Time.unscaledDeltaTime;
+
+            animation.SampleAnimation(gameObject, elaspedTime);
+            yield return playOnFixed ? new WaitForFixedUpdate() : new WaitForEndOfFrame();
+        }
+        //End state
+        animation.SampleAnimation(gameObject, _enabled ? animation.length : 0f);
+    }
+    
 }
