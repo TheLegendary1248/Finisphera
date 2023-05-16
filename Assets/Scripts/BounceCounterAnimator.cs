@@ -21,7 +21,18 @@ public class BounceCounterAnimator : MonoBehaviour
     GameObject[] array = { };
     public AnimationCurve curve;
     Coroutine playingAnim;
-    //Update the bounce counter
+    //Proper event subscription
+    public void OnEnable()
+    {
+        GameManager.onBouncesChanged += UpdateCurrentState;
+    }
+    public void OnDisable()
+    {
+        GameManager.onBouncesChanged -= UpdateCurrentState;
+    }
+    /// <summary>
+    /// Updates the bounce counter
+    /// </summary>
     public void UpdateCurrentState()
     {
         int newCount = (int)GameManager.bouncesLeft;

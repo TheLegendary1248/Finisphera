@@ -16,7 +16,13 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Is the game paused?
     /// </summary>
-    public bool isPaused { get; private set; }
+    public static bool isPaused { get; private set; } = false;
+
+    /// <summary>
+    /// Is the game currently at the swing state(time is stopped; waiting for user input)
+    /// </summary>
+
+    public static bool isOnSwing { get; private set; } = true;
     /// <summary>
     /// FILL IN THIS LATER I NEED TO JUST FINISH THE GAME
     /// </summary>
@@ -38,24 +44,59 @@ public class GameManager : MonoBehaviour
     public static float timeSinceLevelStart => Time.time - _timeOfLevelStart;
     public static float timeOfLevelStart => _timeOfLevelStart;
     static float _timeOfLevelStart = 0;
-    public static uint bouncesLeft = 3;
+    
     //Event for session start
     //Event for level start
     //
     // Start is called before the first frame update
 
-    void LoadCourse()
+    static void LoadCourse()
     {
         //Finalize this method
         InitializeSession();
     }
     /// <summary>
-    /// 
+    /// Starts the game and initializes values
     /// </summary>
-    void InitializeSession()
+    static void InitializeSession()
     {
-        onNewLevel?.Invoke();
+        Debug.Log("Init");
+        ExitPause(); 
+        EnterSwing();   
         _timeOfCourseStart = _timeOfLevelStart = Time.time;
+        //Notify
+        onNewLevel?.Invoke();
+    }
+    static void EnterPause()
+    {
+        if(!isOnSwing)
+        {
+            Time.timeScale = 0f;
+        }
+    }
+    static void ExitPause()
+    {
+        if(!isOnSwing)
+        {
+            Time.timeScale = 1f;
+        }
+    }
+    static void EnterSwing()
+    {
+        Time.timeScale = 0f;
+        isOnSwing = true;
+    }
+    static void ExitSwing()
+    {
+        Time.timeScale = 1f;
+        isOnSwing = false;
+    }
+    /// <summary>
+    /// Actually consider it the start of the game on first shot. NOT IMPLEMENTED
+    /// </summary>
+    void MarkStart()
+    {
+        throw new System.Exception();
     }
     [MenuItem("Assets/CheckObjects")]
     static void ClearCurrent()
@@ -71,40 +112,72 @@ public class GameManager : MonoBehaviour
     }
     void LoadNextLevel()
     {
-
+        throw new System.NotImplementedException();
     }
-    public BounceCounterAnimator animator;
     private void Start()
     {
 #if UNITY_EDITOR
         //If the scene has gameobjects present already, treat is as an ongoing game
         if(SceneManager.GetActiveScene().GetRootGameObjects().Length > 0)
         {
-            
+            InitializeSession();
         }
 #endif
         return;
-        animator.UpdateCurrentState();
     }
-    void Update()
+    private void FixedUpdate()
     {
-        bool gotInput = false;
-        if (Input.GetKeyDown(KeyCode.T))
+        //Check if time scale is appropiate to current TimeScale
+        if (isPaused & Time.timeScale != 0)
         {
-            gotInput = true;
-            bouncesLeft += 1;
-            
+            Debug.LogError("The game is paused, but TimeScale is NOT zero");
+            Debug.Log($"p {isPaused} : s {isOnSwing} : {Time.timeScale}");
+            Time.timeScale = 0f;
         }
-        if (Input.GetKeyDown(KeyCode.Y))
+        else
         {
-            gotInput = true;
-            bouncesLeft -= 1;
-            
+            if(isOnSwing ? Time.timeScale != 0 : Time.timeScale == 0)
+            {
+                Debug.LogError($"The game is {(!isOnSwing ? "NOT" : "")}in the swing state, but TimeScale is {(!isOnSwing ? "" : "NOT")} zero");
+                Debug.Log($"p {isPaused} : s {isOnSwing} : {Time.timeScale}");
+                Time.timeScale = isOnSwing ? 0f : 1f;
+            }
         }
-        if (gotInput)
+    }
+    static uint _bouncesLeft = 3;
+    public static event System.Action onBouncesChanged;
+    public static uint bouncesLeft {
+        get => _bouncesLeft;
+        set {
+            if (_bouncesLeft == value) return;
+            onBouncesChanged?.Invoke();
+            _bouncesLeft = value;
+        }
+    }
+    public static Dictionary<string, System.Action> Inputs = new Dictionary<string, System.Action>
+    {
+        {"Submit", OnSubmit },
+        {"Back", () => OnSubmit() },
+    };
+    public static void OnSubmit()
+    {
+        if(isOnSwing)
         {
-            animator.UpdateCurrentState();
-            Debug.Log($"Bounces Left: {bouncesLeft}");
+            BallScript.self.rb.AddForce(Vector2.one * 5f, ForceMode2D.Impulse);
+            //Get force from mouse position, calculate with ball
+            //Give force to ball
+            ExitSwing();
         }
+    }
+    Vector2 CalculateForce(Rigidbody2D rb)
+    {
+        //Get mouse pos
+        //Normalize etc, etc
+        throw new System.NotImplementedException();
+        return Vector2.zero;
+    }
+    public static void OnBack()
+    {
+
     }
 }

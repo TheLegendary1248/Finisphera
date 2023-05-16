@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    int unregisterdKeyChainHits = 0;
+    void Awake()
     {
         
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        GetInput();    
+    }
+    void GetInput()
+    {
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            GameManager.Inputs["Submit"]();
+        }
     }
 }

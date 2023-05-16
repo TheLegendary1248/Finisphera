@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BallScript : MonoBehaviour
 {
-    public static event System.Action onBounce;
+    static event System.Action onBounce;
     public static Vector2 spawnpoint;
     public static BallScript self;
     public ObjectGravity objGrav;
@@ -17,6 +17,7 @@ public class BallScript : MonoBehaviour
     private void OnCollisionEnter2D()
     {
         onBounce?.Invoke();
+        GameManager.bouncesLeft -= 1;
     }
     public void Update()
     {
