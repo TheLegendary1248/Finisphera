@@ -9,14 +9,15 @@ public class GameManager : MonoBehaviour
     /// This flag is set true during a level being cleared
     /// </summary>
     public bool onlevelClearStage { get; private set; }
-    /// <summary>
-    /// Called with boolean indicating current pause state
-    /// </summary>
-    public static event System.Action<bool> onPause;
+
     /// <summary>
     /// Is the game paused?
     /// </summary>
     public static bool isPaused { get; private set; } = false;
+    /// <summary>
+    /// Called when entering or exiting the paused state, passing a true on enter and vice versa
+    /// </summary>
+    public static event System.Action<bool> onPause;
 
     /// <summary>
     /// Is the game currently at the swing state(time is stopped; waiting for user input)
@@ -24,9 +25,9 @@ public class GameManager : MonoBehaviour
 
     public static bool isOnSwing { get; private set; } = true;
     /// <summary>
-    /// FILL IN THIS LATER I NEED TO JUST FINISH THE GAME
+    /// Called when entering or exiting the swing state, passing a true on enter and vice versa
     /// </summary>
-    public static event System.Action<bool> onStroke;
+    public static event System.Action<bool> onSwing;
     
     public static event System.Action onNewLevel;
     public static event System.Action reachedGoal;
@@ -45,11 +46,9 @@ public class GameManager : MonoBehaviour
     public static float timeOfLevelStart => _timeOfLevelStart;
     static float _timeOfLevelStart = 0;
     
-    //Event for session start
-    //Event for level start
-    //
-    // Start is called before the first frame update
-
+    /// <summary>
+    /// Function for loading a course
+    /// </summary>
     static void LoadCourse()
     {
         //Finalize this method
@@ -67,12 +66,17 @@ public class GameManager : MonoBehaviour
         //Notify
         onNewLevel?.Invoke();
     }
+    /// <summary>
+    /// Function for entering
+    /// </summary>
     static void EnterPause()
     {
         if(!isOnSwing)
         {
             Time.timeScale = 0f;
         }
+        isPaused = true;
+        onPause?.Invoke(true);
     }
     static void ExitPause()
     {
@@ -80,17 +84,21 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
+        isPaused = false;
+        onPause?.Invoke(false);
     }
     static void EnterSwing()
     {
         bouncesLeft = 3;
         Time.timeScale = 0f;
         isOnSwing = true;
+        onSwing?.Invoke(true);
     }
     static void ExitSwing()
     {
         Time.timeScale = 1f;
         isOnSwing = false;
+        onSwing?.Invoke(false);
     }
     /// <summary>
     /// Actually consider it the start of the game on first shot. NOT IMPLEMENTED
@@ -159,10 +167,11 @@ public class GameManager : MonoBehaviour
     public static Dictionary<string, System.Action> Inputs = new Dictionary<string, System.Action>
     {
         {"Submit", OnSubmit },
-        {"Back", () => OnSubmit() },
+        {"Reset", OnReset },
     };
     public static void OnSubmit()
     {
+        if (isPaused) return;
         if(isOnSwing)
         {
             BallScript ball = BallScript.self;
@@ -171,12 +180,20 @@ public class GameManager : MonoBehaviour
             ExitSwing();
         }
     }
+    public static void OnReset()
+    {
+        if (isPaused) return;
+        if(!isOnSwing)
+        {
+            BallScript.self.ResetToLastPoint();
+            EnterSwing();
+        }
+    }
     Vector2 CalculateForce(Rigidbody2D rb)
     {
         //Get mouse pos
         //Normalize etc, etc
         throw new System.NotImplementedException();
-        return Vector2.zero;
     }
     public static void OnBack()
     {

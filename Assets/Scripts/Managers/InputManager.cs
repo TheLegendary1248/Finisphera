@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    int unregisterdKeyChainHits = 0;
+    int unregisterdKeyChainHits;
     void Awake()
     {
         

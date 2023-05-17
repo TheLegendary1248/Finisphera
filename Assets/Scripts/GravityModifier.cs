@@ -44,7 +44,7 @@ public class GravityModifier : MonoBehaviour
             ContactPoint2D contact = collision.GetContact(i);
             Collider2D collider = contact.collider;
             ObjectGravity otherObj;
-            if (otherObj = collider.GetComponent<ObjectGravity>());
+            if (otherObj = collider.GetComponent<ObjectGravity>())
             {
                 float flip = (isTowards ? 1 : -1);
                 switch (type)

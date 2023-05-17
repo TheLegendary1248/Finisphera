@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ToggledAnimation : MonoBehaviour
 {
-    public AnimationClip animation;
+    public new AnimationClip animation;
     bool _activeState;
     public bool activeState
     {

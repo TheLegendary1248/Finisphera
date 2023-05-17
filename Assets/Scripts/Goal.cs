@@ -16,7 +16,6 @@ public class Goal : MonoBehaviour
             collision.gameObject.GetComponent<BallScript>().Remove();
             Instantiate(fx, transform.position, transform.rotation);
         }
-            
         //Debug.Log(collision);
     }
     // Update is called once per frame

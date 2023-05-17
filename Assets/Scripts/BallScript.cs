@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BallScript : MonoBehaviour
 {
-    static event System.Action onBounce;
     public static Vector2 spawnpoint;
     public static Vector2 lastStrokePoint;
     public static BallScript self;
@@ -15,9 +14,17 @@ public class BallScript : MonoBehaviour
     {
         self = this;
     }
+    private void Awake()
+    {
+        GameManager.onSwing += SetLastStrokePoint;
+    }
+    private void OnDestroy()
+    {
+        GameManager.onSwing -= SetLastStrokePoint;
+    }
+    void SetLastStrokePoint(bool state) => lastStrokePoint = state ? transform.position : lastStrokePoint;
     private void OnCollisionEnter2D()
     {
-        onBounce?.Invoke();
         GameManager.bouncesLeft -= 1;
     }
     public void Remove() => Toggle(false);
@@ -31,8 +38,12 @@ public class BallScript : MonoBehaviour
     /// <summary>
     /// Process input
     /// </summary>
-    void Kill()
+    public void ResetToLastPoint()
     {
-        
+        transform.position = lastStrokePoint;
     }
+    public void FullReset()
+    {
+        transform.position = spawnpoint;
+    }    
 }
